@@ -1,0 +1,10 @@
+{
+  "version": "0.1.0",
+  "skills": [
+    {
+      "name": "vercel-react-best-practices",
+      "path": "skills/vercel-react-best-practices",
+      "description": "React/Next.js 성능 최적화 가이드"
+    }
+  ]
+}
