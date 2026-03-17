@@ -5,15 +5,11 @@
 새 프로젝트를 시작할 때 매번 `AGENTS.md`를 처음부터 작성하지 않고,
 필요한 스킬만 가져와 빠르게 프로젝트 규칙을 세팅하는 것을 목표로 합니다.
 
-## 현재 상태 (2026-03-16)
+## MVP 목적
 
-- 완료:
-  - 허브 아키텍처 설계 문서 작성
-  - MVP 구현 계획 문서 작성
-- 예정:
-  - 스킬 선택 설치 스크립트
-  - `AGENTS.md` 템플릿 생성 스크립트
-  - `skills-lock.json` 기반 수동 업데이트 스크립트
+- 새 프로젝트에서 필요한 스킬만 선택 설치한다.
+- 템플릿 기반으로 `AGENTS.md`를 자동 생성한다.
+- 설치 시점 버전을 `skills-lock.json`에 기록해 재현성을 확보한다.
 
 ## 왜 이 저장소를 쓰나
 
@@ -62,11 +58,9 @@ agent-foundry/
   CONTRIBUTION.md
 ```
 
-## 사용 예시 (MVP 구현 후)
+## 빠른 시작
 
-아래 명령은 MVP 스크립트 구현 이후 기준 예시입니다.
-
-### 1) 새 프로젝트에 스킬 설치 + AGENTS 생성
+### 1) 프로젝트 부트스트랩
 
 ```bash
 bash scripts/bootstrap-project.sh \
@@ -89,6 +83,12 @@ bash scripts/update-skills.sh \
   --repo-root /path/to/agent-foundry \
   --target /path/to/new-project
 ```
+
+## 버전 고정/업데이트 정책
+
+- 기본 정책은 고정 버전 설치이며, 결과는 `skills-lock.json`에 기록된다.
+- 자동 강제 업데이트는 하지 않는다.
+- 업데이트가 필요할 때만 `update-skills.sh`를 수동 실행한다.
 
 ## 문서
 
