@@ -7,6 +7,6 @@ trap 'rm -rf "$TMP"' EXIT
 bash "$ROOT/scripts/install-skill.sh" \
   --repo-root "$ROOT" \
   --target "$TMP" \
-  --skill vercel-react-best-practices
+  --skill coding-conventions
 
-[[ -f "$TMP/.agents/skills/vercel-react-best-practices/SKILL.md" ]]
+[[ -f "$TMP/.agents/skills/coding-conventions/SKILL.md" ]]

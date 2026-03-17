@@ -76,12 +76,6 @@ if [[ ! -f "$MANIFEST" ]]; then
   exit 1
 fi
 
-MANIFEST_VERSION="$(jq -r '.version' "$MANIFEST")"
-if [[ -z "$MANIFEST_VERSION" || "$MANIFEST_VERSION" == "null" ]]; then
-  echo "manifest version missing" >&2
-  exit 1
-fi
-
 if [[ ${#SKILL_LIST[@]} -gt 0 ]]; then
   SKILLS_JSON="$(printf '%s\n' "${SKILL_LIST[@]}" | jq -R . | jq -s .)"
 else
@@ -92,8 +86,7 @@ INSTALLED_AT="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
 
 jq -n \
   --arg hub "YOOGOMJA/agent-foundry" \
-  --arg version "v$MANIFEST_VERSION" \
   --arg installedAt "$INSTALLED_AT" \
   --argjson skills "$SKILLS_JSON" \
-  '{hub: $hub, version: $version, installedAt: $installedAt, skills: $skills}' \
+  '{hub: $hub, installedAt: $installedAt, skills: $skills}' \
   > "$TARGET/skills-lock.json"

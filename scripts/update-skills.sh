@@ -49,16 +49,6 @@ if [[ ! -f "$MANIFEST" ]]; then
   exit 1
 fi
 
-LOCK_VERSION="$(jq -r '.version' "$LOCK_FILE")"
-MANIFEST_VERSION="$(jq -r '.version' "$MANIFEST")"
-EXPECTED_VERSION="v$MANIFEST_VERSION"
-
-if [[ "$LOCK_VERSION" != "$EXPECTED_VERSION" ]]; then
-  echo "lock version mismatch: lock=$LOCK_VERSION manifest=$EXPECTED_VERSION" >&2
-  echo "update aborted. align lock version explicitly before retrying." >&2
-  exit 1
-fi
-
 while IFS= read -r skill; do
   [[ -n "$skill" ]] || continue
   bash "$REPO_ROOT/scripts/install-skill.sh" \
