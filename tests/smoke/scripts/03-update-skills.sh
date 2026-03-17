@@ -7,7 +7,7 @@ trap 'rm -rf "$TMP"' EXIT
 cat > "$TMP/skills-lock.json" <<'JSON'
 {
   "hub": "YOOGOMJA/agent-foundry",
-  "version": "v0.1.0",
+  "installedAt": "2026-01-01T00:00:00Z",
   "skills": ["coding-conventions"]
 }
 JSON
