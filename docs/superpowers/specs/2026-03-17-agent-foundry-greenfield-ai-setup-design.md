@@ -118,6 +118,7 @@ ADR 7개는 pipeline 설계 과정의 프로젝트 결정이므로 agent-foundry
 | `--skills` | 하나 이상 필수 (동시 사용 가능) | 스킬 이름 콤마 구분 (예: `coding-conventions`) |
 | `--name` | 선택 | 프로젝트 이름. 없으면 현재 디렉토리 이름 사용 |
 | `--repo` | 선택 | GitHub repo 주소. 없으면 빈칸 |
+| `--output` | 선택 (테스트/CI용) | 출력 디렉토리 override. 없으면 `process.cwd()` |
 
 ### 플래그 조합 규칙
 
