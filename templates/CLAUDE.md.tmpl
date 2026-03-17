@@ -1,0 +1,47 @@
+# CLAUDE.md — {{PROJECT_NAME}}
+
+## 프로젝트 개요
+- Turborepo 모노레포: apps/web (Next.js + FSD), apps/api (NestJS)
+- 디자인 시스템: packages/ui (shadcn + Storybook)
+- 공유 타입: packages/types (FE-BE 단일 소스)
+
+## FSD 규칙
+- FSD v2.1 레이어 구조 준수: app > pages > widgets > features > entities > shared
+- shared 레이어는 Phase 2에서 확정. Phase 3에서 직접 수정 금지 (별도 PR 필요)
+- features/ 슬라이스 간 직접 import 금지 (shared를 통해서만)
+- steiger 린트 비차단으로 실행. 경고는 참고, 에러만 대응
+
+## ADR 규칙
+- 아키텍처 결정 전 docs/adr/ 검색 (adrflow search_decisions)
+- 기존 ADR 있으면 참조하며 진행
+- 없으면 ADR 작성 (Proposed)
+- 자동 승인: 단일 파일 리팩토링, 기존 ADR 세부 조정
+- 나의 승인 필수: 신규 의존성, DB 스키마 변경, API 계약 변경, 2개+ 슬라이스 영향
+- 커밋/PR에 관련 ADR 번호 명시
+
+## Engram 메모리 저장 기준
+- ADR 결정 시 → mem_save(type: "decision", scope: "project")
+- Phase 완료 시 → mem_save(type: "milestone")
+- 중요한 버그 해결 시 → mem_save(type: "learning")
+- 디자인/아키텍처 선택 시 → mem_save(type: "architecture")
+- 세션 종료 시 → mem_session_end
+
+## 코드 스타일
+- coding-conventions 스킬이 상세 규칙과 Good/Bad 예시를 담당
+- 핵심 요약: FP 우선 (순수 함수 분리), 불변성, FSD public API, YAGNI, SOLID
+
+## 핸드오프 규칙
+- 에이전트 간 통신은 docs/ 파일로만
+- 산출물은 templates/handoff/ 템플릿을 따름
+- packages/types/ 변경은 FE/BE 동시 반영
+
+## 테스트 규칙
+- TDD 필수: RED → GREEN → REFACTOR (superpowers TDD)
+- VRT: Playwright toHaveScreenshot() with animations: "disabled"
+- E2E: critical user flow 기준
+- Lost Pixel, steiger: 비차단 리포트
+
+## 비용 제한
+- 세션당: --max-budget-usd 3~5, --max-turns 20~40
+- Ralph Loop: max 5회
+- 사고 토큰: MAX_THINKING_TOKENS=8000

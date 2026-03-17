@@ -99,3 +99,19 @@ bash scripts/update-skills.sh \
 
 공개 레포로 운영하되, 1차 목적은 작성자의 실제 개발 워크플로우 최적화입니다.
 필요가 맞는 사용자라면 동일한 방식으로 가져다 쓸 수 있게 유지합니다.
+
+## 사용 방법
+
+### npx (설치 불필요)
+
+새 프로젝트 디렉토리에서:
+
+```bash
+npx github:kyeongsoo-yoo/agent-foundry --template fullstack --name my-app
+```
+
+### 스킬만 별도 설치
+
+```bash
+npx skills add https://github.com/kyeongsoo-yoo/agent-foundry --skill coding-conventions
+```
