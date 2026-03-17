@@ -1,0 +1,24 @@
+{
+  "_project": "{{GITHUB_REPO}}",
+  "mcpServers": {
+    "adrflow": {
+      "command": "npx",
+      "args": ["-y", "adrflow"]
+    },
+    "shadcn-ui": {
+      "command": "npx",
+      "args": ["-y", "@jpisnice/shadcn-ui-mcp-server"],
+      "env": {
+        "GITHUB_API_KEY": "${GITHUB_TOKEN}"
+      }
+    },
+    "engram": {
+      "command": "engram",
+      "args": ["mcp"]
+    },
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@anthropic-ai/mcp-server-playwright"]
+    }
+  }
+}
