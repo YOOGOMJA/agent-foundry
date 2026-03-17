@@ -33,3 +33,11 @@ grep -q "{{PROJECT_NAME}}" "$ROOT/templates/CLAUDE.md.tmpl" || { echo "FAIL: CLA
 grep -q "{{GITHUB_REPO}}" "$ROOT/templates/mcp.json.tmpl" || { echo "FAIL: mcp.json.tmpl missing {{GITHUB_REPO}}"; exit 1; }
 
 echo "OK: templates"
+
+# checklists & adr
+check "checklists/kickoff.md"
+check "checklists/review-criteria.md"
+check "adr/ADR-000-template.md"
+check "docs/references/toolchain-catalog.md"
+
+echo "OK: checklists & adr"
