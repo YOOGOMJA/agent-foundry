@@ -6,15 +6,26 @@ set -euo pipefail
 SCRIPTS_DIR="$(cd "$(dirname "$0")" && pwd)"
 PROMPTS_DIR="$SCRIPTS_DIR/../prompts"
 
-# 필수 프롬프트 파일 확인
-# phase1-pm.md는 초안 제공. 나머지는 프로젝트 시작 시 phase1을 참고해서 생성.
+# 프롬프트 파일 확인 (없으면 경고만, 에러 아님)
+# 각 phase 프롬프트는 프로젝트 특화 내용이므로 직접 작성 필요.
+# 참고: docs/templates/ 핸드오프 템플릿을 기반으로 prompts/ 아래에 작성.
+MISSING_PROMPTS=()
 for required in phase1-pm.md phase2a-architect.md phase2b-designer.md phase3-fe-developer.md phase3-be-developer.md phase4-tester.md; do
   if [ ! -f "$PROMPTS_DIR/$required" ]; then
-    echo "Error: Missing prompt file: $PROMPTS_DIR/$required"
-    echo "Create it based on templates/prompts/phase1-pm.md"
-    exit 1
+    MISSING_PROMPTS+=("$required")
   fi
 done
+
+if [ ${#MISSING_PROMPTS[@]} -gt 0 ]; then
+  echo "⚠️  Missing prompt files in prompts/:"
+  for f in "${MISSING_PROMPTS[@]}"; do
+    echo "   - $f"
+  done
+  echo ""
+  echo "Create these files before running the pipeline."
+  echo "See NEXT_STEPS.md for guidance."
+  exit 1
+fi
 
 wait_for_gate() {
   local LABEL=$1

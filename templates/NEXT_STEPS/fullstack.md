@@ -32,7 +32,25 @@ export ANTHROPIC_API_KEY=sk-ant-...
 chmod +x scripts/orchestrate.sh scripts/ralph-loop.sh scripts/merge-worktree.sh
 ~~~
 
-## 4. 목표 작성 후 파이프라인 시작
+## 4. 파이프라인 프롬프트 작성
+
+`scripts/orchestrate.sh`는 `prompts/` 아래 phase별 프롬프트 파일이 있어야 실행됩니다.
+각 파일은 프로젝트 특화 내용이므로 직접 작성하세요.
+
+~~~bash
+mkdir -p prompts
+# 아래 6개 파일 작성 (docs/templates/ 핸드오프 템플릿 참고)
+touch prompts/phase1-pm.md
+touch prompts/phase2a-architect.md
+touch prompts/phase2b-designer.md
+touch prompts/phase3-fe-developer.md
+touch prompts/phase3-be-developer.md
+touch prompts/phase4-tester.md
+~~~
+
+각 파일에 해당 phase의 AI 에이전트에게 전달할 프롬프트를 작성합니다.
+
+## 5. 목표 작성 후 파이프라인 시작
 
 ~~~bash
 cp docs/templates/goal.md docs/goal.md
