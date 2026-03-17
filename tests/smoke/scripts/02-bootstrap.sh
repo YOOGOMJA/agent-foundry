@@ -8,8 +8,8 @@ bash "$ROOT/scripts/bootstrap-project.sh" \
   --repo-root "$ROOT" \
   --target "$TMP" \
   --template frontend \
-  --skills vercel-react-best-practices
+  --skills coding-conventions
 
 [[ -f "$TMP/AGENTS.md" ]]
 [[ -f "$TMP/skills-lock.json" ]]
-[[ -f "$TMP/.agents/skills/vercel-react-best-practices/SKILL.md" ]]
+[[ -f "$TMP/.agents/skills/coding-conventions/SKILL.md" ]]

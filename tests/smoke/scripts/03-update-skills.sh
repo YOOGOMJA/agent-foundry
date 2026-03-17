@@ -8,9 +8,9 @@ cat > "$TMP/skills-lock.json" <<'JSON'
 {
   "hub": "YOOGOMJA/agent-foundry",
   "version": "v0.1.0",
-  "skills": ["vercel-react-best-practices"]
+  "skills": ["coding-conventions"]
 }
 JSON
 
 bash "$ROOT/scripts/update-skills.sh" --repo-root "$ROOT" --target "$TMP"
-[[ -f "$TMP/.agents/skills/vercel-react-best-practices/SKILL.md" ]]
+[[ -f "$TMP/.agents/skills/coding-conventions/SKILL.md" ]]

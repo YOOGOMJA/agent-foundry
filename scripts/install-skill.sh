@@ -53,7 +53,7 @@ if [[ ! -f "$MANIFEST" ]]; then
   exit 1
 fi
 
-SKILL_PATH="$(jq -r --arg name "$SKILL" '.skills[] | select(.name == $name) | .path' "$MANIFEST")"
+SKILL_PATH="$(jq -r --arg name "$SKILL" '.[$name].path // empty' "$MANIFEST")"
 if [[ -z "$SKILL_PATH" || "$SKILL_PATH" == "null" ]]; then
   echo "skill not found in manifest: $SKILL" >&2
   exit 1
