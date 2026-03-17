@@ -41,3 +41,10 @@ check "adr/ADR-000-template.md"
 check "docs/references/toolchain-catalog.md"
 
 echo "OK: checklists & adr"
+
+# NEXT_STEPS
+check "templates/NEXT_STEPS/fullstack.md"
+grep -q "claude plugin marketplace add" "$ROOT/templates/NEXT_STEPS/fullstack.md" || { echo "FAIL: NEXT_STEPS missing plugin commands"; exit 1; }
+grep -q "orchestrate.sh" "$ROOT/templates/NEXT_STEPS/fullstack.md" || { echo "FAIL: NEXT_STEPS missing orchestrate.sh"; exit 1; }
+
+echo "OK: NEXT_STEPS"
