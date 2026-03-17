@@ -82,7 +82,7 @@ NEXT_STEPS.md 복사
 | `checklists/kickoff.md` | `checklists/kickoff.md` | |
 | `checklists/review-criteria.md` | `checklists/review-criteria.md` | |
 | ADR 7개 | **포팅 안 함** | 특정 프로젝트 결정 |
-| `toolchain-catalog.md` | `docs/references/toolchain-catalog.md` | 참고 자료 |
+| `toolchain-catalog.md` | `docs/references/toolchain-catalog.md` | agent-foundry 레포 내부 참고 문서. 대상 프로젝트에 복사하지 않음 |
 
 ADR 7개는 pipeline 설계 과정의 프로젝트 결정이므로 agent-foundry에 포함하지 않는다.
 새 프로젝트의 ADR은 `adr/ADR-000-template.md`를 기반으로 프로젝트에서 직접 생성한다.
@@ -100,12 +100,22 @@ ADR 7개는 pipeline 설계 과정의 프로젝트 결정이므로 agent-foundry
 
 파일을 가져다 쓰는 배달부. AI 없음. Node built-in(`fs`, `fetch`, `path`)만 사용. 외부 의존성 없음.
 
+### fetch 전략
+
+- `raw.githubusercontent.com/{owner}/{repo}/{ref}/{path}` 엔드포인트 사용 (Contents API 불필요, rate limit 없음)
+- 환경변수 `GITHUB_TOKEN`이 있으면 `Authorization: Bearer` 헤더로 전달 (private repo 지원)
+- 파일 fetch 실패 시(네트워크 오류, 404 등) 즉시 abort, non-zero exit code, 실패한 경로 출력
+
+### placeholder 형식
+
+템플릿 파일 내 `{{KEY}}` 형식을 문자열 치환한다. 예: `{{PROJECT_NAME}}` → `my-app`.
+
 ### 플래그 정의
 
 | 플래그 | 필수 | 설명 |
 |--------|------|------|
-| `--template` | 둘 중 하나 | 템플릿 이름 (예: `fullstack`) |
-| `--skills` | 둘 중 하나 | 스킬 이름 콤마 구분 (예: `coding-conventions`) |
+| `--template` | 하나 이상 필수 (동시 사용 가능) | 템플릿 이름 (예: `fullstack`) |
+| `--skills` | 하나 이상 필수 (동시 사용 가능) | 스킬 이름 콤마 구분 (예: `coding-conventions`) |
 | `--name` | 선택 | 프로젝트 이름. 없으면 현재 디렉토리 이름 사용 |
 | `--repo` | 선택 | GitHub repo 주소. 없으면 빈칸 |
 
@@ -150,6 +160,8 @@ ADR 7개는 pipeline 설계 과정의 프로젝트 결정이므로 agent-foundry
 
 ### manifests/skills.json 구조
 
+스킬은 대상 프로젝트의 `.agents/skills/<name>/`에 복사된다.
+
 ```json
 {
   "coding-conventions": {
@@ -160,6 +172,8 @@ ADR 7개는 pipeline 설계 과정의 프로젝트 결정이므로 agent-foundry
 ```
 
 ### skills-lock.json (출력물)
+
+버전 태그 기반 lock(이전 MVP 설계)을 SHA 기반으로 변경한다. `update-skills.sh`는 이 설계 범위 밖이다.
 
 ```json
 {
