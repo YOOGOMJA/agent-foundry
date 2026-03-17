@@ -1,0 +1,25 @@
+{
+  "fullstack": {
+    "files": [
+      "templates/CLAUDE.md.tmpl -> CLAUDE.md",
+      "templates/mcp.json.tmpl -> .mcp.json",
+      "templates/scripts/orchestrate.sh -> scripts/orchestrate.sh",
+      "templates/scripts/ralph-loop.sh -> scripts/ralph-loop.sh",
+      "templates/scripts/merge-worktree.sh -> scripts/merge-worktree.sh",
+      "templates/handoff/goal.md -> docs/templates/goal.md",
+      "templates/handoff/prd.md -> docs/templates/prd.md",
+      "templates/handoff/screen-spec.md -> docs/templates/screen-spec.md",
+      "templates/handoff/api-spec.md -> docs/templates/api-spec.md",
+      "templates/handoff/architecture.md -> docs/templates/architecture.md",
+      "checklists/kickoff.md -> docs/checklists/kickoff.md",
+      "checklists/review-criteria.md -> docs/checklists/review-criteria.md",
+      "adr/ADR-000-template.md -> docs/adr/ADR-000-template.md",
+      "templates/NEXT_STEPS/fullstack.md -> NEXT_STEPS.md"
+    ],
+    "skills": ["coding-conventions"],
+    "placeholders": {
+      "PROJECT_NAME": "--name flag value",
+      "GITHUB_REPO": "--repo flag value (empty string if not provided)"
+    }
+  }
+}

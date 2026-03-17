@@ -1,0 +1,13 @@
+{
+  "name": "agent-foundry",
+  "version": "0.1.0",
+  "description": "Greenfield AI 운영 환경 부트스트랩 도구",
+  "bin": {
+    "agent-foundry": "./bin/agent-foundry.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": ["claude", "ai", "scaffold", "skills"],
+  "license": "MIT"
+}

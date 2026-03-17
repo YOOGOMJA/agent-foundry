@@ -1,0 +1,6 @@
+{
+  "coding-conventions": {
+    "path": "skills/coding-conventions",
+    "description": "TS/React 명명규칙, FP 패턴, FSD 구조, Zustand/XState 패턴"
+  }
+}
