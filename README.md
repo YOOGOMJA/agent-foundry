@@ -67,7 +67,7 @@ bash scripts/bootstrap-project.sh \
   --repo-root /path/to/agent-foundry \
   --target /path/to/new-project \
   --template frontend \
-  --skills vercel-react-best-practices,web-design-guidelines
+  --skills vercel-react-best-practices,coding-conventions
 ```
 
 결과 예시:
