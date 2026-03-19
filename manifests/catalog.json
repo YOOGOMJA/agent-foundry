@@ -1,0 +1,64 @@
+{
+  "skills": [
+    {
+      "name": "coding-conventions",
+      "description": "TS/React 명명규칙, FP 패턴, FSD 구조, Zustand/XState 패턴",
+      "path": "skills/coding-conventions",
+      "trust": "curated",
+      "install": {
+        "kind": "local-copy",
+        "path": "skills/coding-conventions"
+      }
+    },
+    {
+      "name": "vercel-react-best-practices",
+      "description": "Vercel React/Next.js 성능 최적화 가이드",
+      "path": "skills/vercel-react-best-practices",
+      "trust": "curated",
+      "install": {
+        "kind": "local-copy",
+        "path": "skills/vercel-react-best-practices"
+      }
+    },
+    {
+      "name": "shared-git-workflow",
+      "description": "외부 저장소를 복사해 사용하는 예시 스킬",
+      "source": "github:example/shared-agent-skill",
+      "trust": "external",
+      "install": {
+        "kind": "git-copy",
+        "repo": "https://github.com/example/shared-agent-skill.git",
+        "ref": "main",
+        "path": "skills/shared-git-workflow"
+      },
+      "notes": "예시 외부 스킬 엔트리"
+    }
+  ],
+  "docs": [
+    {
+      "type": "goal",
+      "source": "templates/handoff/goal.md",
+      "destination": "docs/goal.md"
+    },
+    {
+      "type": "prd",
+      "source": "templates/handoff/prd.md",
+      "destination": "docs/prd.md"
+    },
+    {
+      "type": "architecture",
+      "source": "templates/handoff/architecture.md",
+      "destination": "docs/architecture.md"
+    },
+    {
+      "type": "screen-spec",
+      "source": "templates/handoff/screen-spec.md",
+      "destination": "docs/screen-spec.md"
+    },
+    {
+      "type": "api-spec",
+      "source": "templates/handoff/api-spec.md",
+      "destination": "docs/api-spec.md"
+    }
+  ]
+}
