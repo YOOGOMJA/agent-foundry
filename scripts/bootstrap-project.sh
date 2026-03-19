@@ -53,6 +53,12 @@ if [[ ! -f "$TEMPLATE_FILE" ]]; then
   exit 1
 fi
 
+MANIFEST="$REPO_ROOT/manifests/skills.json"
+if [[ ! -f "$MANIFEST" ]]; then
+  echo "manifest not found: $MANIFEST" >&2
+  exit 1
+fi
+
 mkdir -p "$TARGET"
 cp "$TEMPLATE_FILE" "$TARGET/AGENTS.md"
 
@@ -70,12 +76,6 @@ if [[ -n "$SKILLS_RAW" ]]; then
   done
 fi
 
-MANIFEST="$REPO_ROOT/manifests/skills.json"
-if [[ ! -f "$MANIFEST" ]]; then
-  echo "manifest not found: $MANIFEST" >&2
-  exit 1
-fi
-
 if [[ ${#SKILL_LIST[@]} -gt 0 ]]; then
   SKILLS_JSON="$(printf '%s\n' "${SKILL_LIST[@]}" | jq -R . | jq -s .)"
 else
@@ -83,10 +83,14 @@ else
 fi
 
 INSTALLED_AT="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+REF="$(git -C "$REPO_ROOT" rev-parse HEAD 2>/dev/null || printf 'local')"
 
 jq -n \
-  --arg hub "YOOGOMJA/agent-foundry" \
+  --arg schemaVersion "2" \
   --arg installedAt "$INSTALLED_AT" \
+  --arg source "github:kyeongsoo-yoo/agent-foundry" \
+  --arg ref "$REF" \
+  --arg template "$TEMPLATE" \
   --argjson skills "$SKILLS_JSON" \
-  '{hub: $hub, installedAt: $installedAt, skills: $skills}' \
+  '{schemaVersion: ($schemaVersion | tonumber), installedAt: $installedAt, source: $source, ref: $ref, template: $template, skills: $skills, externals: []}' \
   > "$TARGET/skills-lock.json"

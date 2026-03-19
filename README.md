@@ -47,6 +47,8 @@ agent-foundry/
       fullstack.md
   manifests/
     skills.json
+    templates.json
+    catalog.json
   scripts/
     bootstrap-project.sh
     install-skill.sh
@@ -59,6 +61,23 @@ agent-foundry/
 ```
 
 ## 빠른 시작
+
+### 0) 작업 하네스 명령 (권장)
+
+```bash
+# curated/external 카탈로그 검색
+node bin/agent-foundry.js skills search coding --source curated
+
+# 스킬 설치 (lock v2 기록, 대상 경로 명시 권장)
+node bin/agent-foundry.js skills install coding-conventions --output /path/to/new-project
+
+# 레포 점검 (대상 레포 명시)
+node bin/agent-foundry.js audit --format json --repo /path/to/new-project
+
+# 누락 문서 제안/생성 (대상 레포 명시)
+node bin/agent-foundry.js docs suggest --repo /path/to/new-project
+node bin/agent-foundry.js docs write goal --repo /path/to/new-project --yes
+```
 
 ### 1) 프로젝트 부트스트랩
 
@@ -74,7 +93,7 @@ bash scripts/bootstrap-project.sh \
 
 - `/path/to/new-project/AGENTS.md` 생성
 - `/path/to/new-project/.agents/skills/*` 설치
-- `/path/to/new-project/skills-lock.json` 생성
+- `/path/to/new-project/skills-lock.json` 생성 (schemaVersion: 2)
 
 ### 2) lock 기준 업데이트
 
@@ -89,6 +108,7 @@ bash scripts/update-skills.sh \
 - 기본 정책은 고정 버전 설치이며, 결과는 `skills-lock.json`에 기록된다.
 - 자동 강제 업데이트는 하지 않는다.
 - 업데이트가 필요할 때만 `update-skills.sh`를 수동 실행한다.
+- lock 파일은 `schemaVersion: 2` + `skills`/`externals`를 함께 기록한다.
 
 ## 문서
 
@@ -102,16 +122,21 @@ bash scripts/update-skills.sh \
 
 ## 사용 방법
 
-### npx (설치 불필요)
+### 템플릿 + 스킬 설치 (레거시 플래그 모드)
 
-새 프로젝트 디렉토리에서:
+새 프로젝트 디렉토리에서(또는 `--output` 지정):
 
 ```bash
-npx github:kyeongsoo-yoo/agent-foundry --template fullstack --name my-app
+node /path/to/agent-foundry/bin/agent-foundry.js \
+  --template fullstack \
+  --name my-app \
+  --output /path/to/new-project
 ```
 
-### 스킬만 별도 설치
+### 스킬만 설치 (작업 하네스 모드)
 
 ```bash
-npx skills add https://github.com/kyeongsoo-yoo/agent-foundry --skill coding-conventions
+node /path/to/agent-foundry/bin/agent-foundry.js \
+  skills install coding-conventions \
+  --output /path/to/new-project
 ```

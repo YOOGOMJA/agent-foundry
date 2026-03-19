@@ -14,3 +14,5 @@ JSON
 
 bash "$ROOT/scripts/update-skills.sh" --repo-root "$ROOT" --target "$TMP"
 [[ -f "$TMP/.agents/skills/coding-conventions/SKILL.md" ]]
+REF="$(git -C "$ROOT" rev-parse HEAD)"
+jq -e --arg ref "$REF" '.schemaVersion == 2 and .source == "github:kyeongsoo-yoo/agent-foundry" and .ref == $ref and (.skills|index("coding-conventions") != null) and (.externals|type=="array")' "$TMP/skills-lock.json" >/dev/null
